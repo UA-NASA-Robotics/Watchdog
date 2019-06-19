@@ -1,0 +1,561 @@
+
+WatchDog.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000003de  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000036a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000012  00800100  00800100  000003de  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003de  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000410  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000040  00000000  00000000  00000450  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000008a3  00000000  00000000  00000490  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000006d8  00000000  00000000  00000d33  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000419  00000000  00000000  0000140b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000078  00000000  00000000  00001824  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000439  00000000  00000000  0000189c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000016f  00000000  00000000  00001cd5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000048  00000000  00000000  00001e44  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 62 00 	jmp	0xc4	; 0xc4 <__vector_11>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 31       	cpi	r26, 0x12	; 18
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 f2 00 	call	0x1e4	; 0x1e4 <main>
+  88:	0c 94 b3 01 	jmp	0x366	; 0x366 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <initTimers>:
+}
+
+void initTimers(void)
+{
+	/* Timer clock = I/O clock / 1024 */
+	TCCR0B = (1<<CS02)|(1<<CS00);
+  90:	85 e0       	ldi	r24, 0x05	; 5
+  92:	85 bd       	out	0x25, r24	; 37
+	TCCR1B = (1<<CS12)|(1<<CS10);
+  94:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7e0081>
+	/* Clear overflow flag */
+	TIFR0  = 1<<TOV0;
+  98:	81 e0       	ldi	r24, 0x01	; 1
+  9a:	85 bb       	out	0x15, r24	; 21
+	TIFR1 = 1<<TOV0;
+  9c:	86 bb       	out	0x16, r24	; 22
+	/* Enable Overflow Interrupt */
+	TIMSK1 = 1<< OCIE1A;
+  9e:	82 e0       	ldi	r24, 0x02	; 2
+  a0:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__TEXT_REGION_LENGTH__+0x7e006f>
+
+	/*setup timer 1 OCA for 1 sec given 1024 division */
+	OCR1A = 15625;
+  a4:	89 e0       	ldi	r24, 0x09	; 9
+  a6:	9d e3       	ldi	r25, 0x3D	; 61
+  a8:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+  ac:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+	/*setup timer 1 OCB for 1 sec given 1024 division */
+	OCR1B = 15625;
+  b0:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7e008b>
+  b4:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7e008a>
+	
+	/*reset TCNT of both timers */
+	TCNT0 = 0;
+  b8:	16 bc       	out	0x26, r1	; 38
+	TCNT1 = 0;
+  ba:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  be:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+  c2:	08 95       	ret
+
+000000c4 <__vector_11>:
+}
+
+//timer1 COMPA
+
+ISR(TIMER1_COMPA_vect) {
+  c4:	1f 92       	push	r1
+  c6:	0f 92       	push	r0
+  c8:	0f b6       	in	r0, 0x3f	; 63
+  ca:	0f 92       	push	r0
+  cc:	11 24       	eor	r1, r1
+  ce:	8f 93       	push	r24
+  d0:	9f 93       	push	r25
+	TCNT1 = 0;
+  d2:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+  d6:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+	PORTB ^=(1<<led);
+  da:	95 b1       	in	r25, 0x05	; 5
+  dc:	80 e1       	ldi	r24, 0x10	; 16
+  de:	89 27       	eor	r24, r25
+  e0:	85 b9       	out	0x05, r24	; 5
+}
+  e2:	9f 91       	pop	r25
+  e4:	8f 91       	pop	r24
+  e6:	0f 90       	pop	r0
+  e8:	0f be       	out	0x3f, r0	; 63
+  ea:	0f 90       	pop	r0
+  ec:	1f 90       	pop	r1
+  ee:	18 95       	reti
+
+000000f0 <checkHanging>:
+
+bool checkHanging(char inPin, char outPin, bool oldValue, int time)	/*Function to check if a pin is stalling*/
+{
+	/*	Pre-condition: Takes the inputPin and outputPin for each processor and compares them.	*/
+	/*	Post-condition: Returns if the selected pins are stalling or not.						*/
+	bool newValue = PORTD & (1 << inPin);
+  f0:	ab b1       	in	r26, 0x0b	; 11
+  f2:	e1 e0       	ldi	r30, 0x01	; 1
+  f4:	f0 e0       	ldi	r31, 0x00	; 0
+  f6:	08 2e       	mov	r0, r24
+  f8:	02 c0       	rjmp	.+4      	; 0xfe <checkHanging+0xe>
+  fa:	ee 0f       	add	r30, r30
+  fc:	ff 1f       	adc	r31, r31
+  fe:	0a 94       	dec	r0
+ 100:	e2 f7       	brpl	.-8      	; 0xfa <checkHanging+0xa>
+ 102:	b0 e0       	ldi	r27, 0x00	; 0
+ 104:	ea 23       	and	r30, r26
+ 106:	fb 23       	and	r31, r27
+ 108:	91 e0       	ldi	r25, 0x01	; 1
+ 10a:	ef 2b       	or	r30, r31
+ 10c:	09 f4       	brne	.+2      	; 0x110 <checkHanging+0x20>
+ 10e:	90 e0       	ldi	r25, 0x00	; 0
+	if(newValue == oldValue)		/*If Pin Values are the same...*/
+ 110:	94 13       	cpse	r25, r20
+ 112:	1a c0       	rjmp	.+52     	; 0x148 <checkHanging+0x58>
+	{
+		if(TCNT1 >= time)		/*Check to see if the timer has run out. If it has, then the pin is stalling and needs to be reset*/
+ 114:	40 91 84 00 	lds	r20, 0x0084	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+ 118:	50 91 85 00 	lds	r21, 0x0085	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 11c:	42 17       	cp	r20, r18
+ 11e:	53 07       	cpc	r21, r19
+ 120:	e8 f0       	brcs	.+58     	; 0x15c <checkHanging+0x6c>
+		{		
+			mustRebootPin = true;		/*Set the Flag to be true*/
+ 122:	21 e0       	ldi	r18, 0x01	; 1
+ 124:	20 93 03 01 	sts	0x0103, r18	; 0x800103 <mustRebootPin>
+			pinToReboot = outPin;		/*Store the pin number of the pin that is stalling*/
+ 128:	70 e0       	ldi	r23, 0x00	; 0
+ 12a:	70 93 0d 01 	sts	0x010D, r23	; 0x80010d <pinToReboot+0x1>
+ 12e:	60 93 0c 01 	sts	0x010C, r22	; 0x80010c <pinToReboot>
+			//TCNT1 = 0;					/*Reset the timer*/
+			time = TCNT1 + rebootTime;
+ 132:	40 91 84 00 	lds	r20, 0x0084	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+ 136:	50 91 85 00 	lds	r21, 0x0085	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 13a:	20 91 06 01 	lds	r18, 0x0106	; 0x800106 <rebootTime>
+ 13e:	30 91 07 01 	lds	r19, 0x0107	; 0x800107 <rebootTime+0x1>
+ 142:	24 0f       	add	r18, r20
+ 144:	35 1f       	adc	r19, r21
+ 146:	0a c0       	rjmp	.+20     	; 0x15c <checkHanging+0x6c>
+	}
+	else						/*If the Values are different...*/
+	{
+		//TCNT1 = 0;					/*Reset the timer*/
+
+		time = TCNT1 + rebootTime;
+ 148:	40 91 84 00 	lds	r20, 0x0084	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+ 14c:	50 91 85 00 	lds	r21, 0x0085	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 150:	20 91 06 01 	lds	r18, 0x0106	; 0x800106 <rebootTime>
+ 154:	30 91 07 01 	lds	r19, 0x0107	; 0x800107 <rebootTime+0x1>
+ 158:	24 0f       	add	r18, r20
+ 15a:	35 1f       	adc	r19, r21
+			time = TCNT1 + rebootTime;
+		}
+
+		oldValue = newValue;			/*Set the read value to be the new value to compare against*/
+	}
+	if(inPin == sensor)
+ 15c:	83 30       	cpi	r24, 0x03	; 3
+ 15e:	29 f4       	brne	.+10     	; 0x16a <checkHanging+0x7a>
+		timer1 = time;
+ 160:	30 93 0f 01 	sts	0x010F, r19	; 0x80010f <timer1+0x1>
+ 164:	20 93 0e 01 	sts	0x010E, r18	; 0x80010e <timer1>
+ 168:	0d c0       	rjmp	.+26     	; 0x184 <checkHanging+0x94>
+	else if(inPin == router)
+ 16a:	82 30       	cpi	r24, 0x02	; 2
+ 16c:	29 f4       	brne	.+10     	; 0x178 <checkHanging+0x88>
+		timer2 = time;
+ 16e:	30 93 05 01 	sts	0x0105, r19	; 0x800105 <timer2+0x1>
+ 172:	20 93 04 01 	sts	0x0104, r18	; 0x800104 <timer2>
+ 176:	06 c0       	rjmp	.+12     	; 0x184 <checkHanging+0x94>
+	else if(inPin == led)
+ 178:	84 30       	cpi	r24, 0x04	; 4
+ 17a:	21 f4       	brne	.+8      	; 0x184 <checkHanging+0x94>
+		timer3 = time;
+ 17c:	30 93 11 01 	sts	0x0111, r19	; 0x800111 <timer3+0x1>
+ 180:	20 93 10 01 	sts	0x0110, r18	; 0x800110 <timer3>
+
+	return oldValue;
+}
+ 184:	89 2f       	mov	r24, r25
+ 186:	08 95       	ret
+
+00000188 <pinReboot>:
+{
+	/*	Pre-Condition: Takes in the Pin determined to be stalling					*/
+	/*	Post-Condition: Reboots pin and returns bootWaiting to be true				*/
+
+		/* Set the Time constant we want to wait */		/* (IF THE PROGRAM IS TO BE UNIVERSAL FOR ALL THE CARDS, SET ALL TO THE COMPLETE_BOOT_TIME)*/
+	if(pin == routerOut)		/*If Router was stalling, set the wait time to be equal to the time it takes for the router to reboot*/
+ 188:	83 30       	cpi	r24, 0x03	; 3
+ 18a:	39 f4       	brne	.+14     	; 0x19a <pinReboot+0x12>
+	{
+		rebootTime = COMPLETE_BOOT_TIME;
+ 18c:	84 e9       	ldi	r24, 0x94	; 148
+ 18e:	91 e1       	ldi	r25, 0x11	; 17
+ 190:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <rebootTime+0x1>
+ 194:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <rebootTime>
+ 198:	0f c0       	rjmp	.+30     	; 0x1b8 <pinReboot+0x30>
+	}
+	else if(pin == sensorOut)	/*If Sensor was stalling...*/
+ 19a:	81 11       	cpse	r24, r1
+ 19c:	07 c0       	rjmp	.+14     	; 0x1ac <pinReboot+0x24>
+	{
+		rebootTime = NAVI_BOOT_TIME;
+ 19e:	8a e8       	ldi	r24, 0x8A	; 138
+ 1a0:	92 e0       	ldi	r25, 0x02	; 2
+ 1a2:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <rebootTime+0x1>
+ 1a6:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <rebootTime>
+ 1aa:	06 c0       	rjmp	.+12     	; 0x1b8 <pinReboot+0x30>
+	}
+	else						/*If neither of the above, set to OTHER_BOOT_TIME*/
+	{
+		rebootTime = NAVI_BOOT_TIME;
+ 1ac:	8a e8       	ldi	r24, 0x8A	; 138
+ 1ae:	92 e0       	ldi	r25, 0x02	; 2
+ 1b0:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <rebootTime+0x1>
+ 1b4:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <rebootTime>
+	}
+	
+	pin = 0x00;				/*Set Pin Low*/
+	/*Temp testing*/ PORTC = 0x00;
+ 1b8:	18 b8       	out	0x08, r1	; 8
+
+	TCNT0 = 0;						/*Timer Delay*/
+ 1ba:	16 bc       	out	0x26, r1	; 38
+	while(TCNT0 <= LOW_TIME) {}		/*Wait for the pin to register it is set LOW*/	
+ 1bc:	86 b5       	in	r24, 0x26	; 38
+ 1be:	89 3c       	cpi	r24, 0xC9	; 201
+ 1c0:	e8 f3       	brcs	.-6      	; 0x1bc <pinReboot+0x34>
+
+	pin = 0xFF;				/*Set Pin High*/
+	/*Temp testing*/ PORTC = 0xFF;
+ 1c2:	8f ef       	ldi	r24, 0xFF	; 255
+ 1c4:	88 b9       	out	0x08, r24	; 8
+	bootWaiting = true;				/*Trigger the bootWaiting flag for the main loop*/
+ 1c6:	81 e0       	ldi	r24, 0x01	; 1
+ 1c8:	80 93 0b 01 	sts	0x010B, r24	; 0x80010b <bootWaiting>
+	
+		/*Set the new logic values*/
+	oldValueSensor = sensor;
+ 1cc:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <oldValueSensor>
+	oldValueLed = led;
+ 1d0:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <oldValueLed>
+	oldValueRouter = router;
+ 1d4:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <oldValueRouter>
+	
+	TCNT0 = 0;	
+ 1d8:	16 bc       	out	0x26, r1	; 38
+	TCNT1 = 0;					/*Reset the Timer*/
+ 1da:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 1de:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+ 1e2:	08 95       	ret
+
+000001e4 <main>:
+bool checkHanging(char, char, bool, int);	/*Function to check each processor to see if they are stalling*/
+void pinReboot(char);				/*Function to restart the pin that is found to be stalling*/
+
+int main()
+{
+	DDRD = 0x00;//0b11111111;		/*Set Input Pins */
+ 1e4:	1a b8       	out	0x0a, r1	; 10
+	DDRB = 0x20;
+ 1e6:	90 e2       	ldi	r25, 0x20	; 32
+ 1e8:	94 b9       	out	0x04, r25	; 4
+	DDRC = 0xFF;//0b00000000;		/*Set Output Pins*/
+ 1ea:	8f ef       	ldi	r24, 0xFF	; 255
+ 1ec:	87 b9       	out	0x07, r24	; 7
+	PORTB = 0x20;
+ 1ee:	95 b9       	out	0x05, r25	; 5
+	PORTC = 0xFF;					/*Set output HIGH*/
+ 1f0:	88 b9       	out	0x08, r24	; 8
+
+		/*Loop to test Timers*/
+		initTimers();
+ 1f2:	0e 94 48 00 	call	0x90	; 0x90 <initTimers>
+		//{}
+		//PORTC = 0xFF;
+	//}
+
+		/*Get initial Readings*/ 
+	oldValueSensor = PORTD & (1 << sensor);
+ 1f6:	8b b1       	in	r24, 0x0b	; 11
+ 1f8:	83 fb       	bst	r24, 3
+ 1fa:	88 27       	eor	r24, r24
+ 1fc:	80 f9       	bld	r24, 0
+ 1fe:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <oldValueSensor>
+	oldValueRouter = PORTD & (1 << router);
+ 202:	8b b1       	in	r24, 0x0b	; 11
+ 204:	82 fb       	bst	r24, 2
+ 206:	88 27       	eor	r24, r24
+ 208:	80 f9       	bld	r24, 0
+ 20a:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <oldValueRouter>
+	oldValueLed = PORTD & (1 << led);
+ 20e:	8b b1       	in	r24, 0x0b	; 11
+ 210:	82 95       	swap	r24
+ 212:	81 70       	andi	r24, 0x01	; 1
+ 214:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <oldValueLed>
+
+		/*Initialize variables*/
+	bootWaiting = true;
+ 218:	81 e0       	ldi	r24, 0x01	; 1
+ 21a:	80 93 0b 01 	sts	0x010B, r24	; 0x80010b <bootWaiting>
+	fullReboot = false;
+ 21e:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+	mustRebootPin = false;
+ 222:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <mustRebootPin>
+	
+	rebootTime = NAVI_BOOT_TIME;
+ 226:	8a e8       	ldi	r24, 0x8A	; 138
+ 228:	92 e0       	ldi	r25, 0x02	; 2
+ 22a:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <rebootTime+0x1>
+ 22e:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <rebootTime>
+
+	timer1 = TCNT1 + WAIT_TIME;
+ 232:	e4 e8       	ldi	r30, 0x84	; 132
+ 234:	f0 e0       	ldi	r31, 0x00	; 0
+ 236:	80 81       	ld	r24, Z
+ 238:	91 81       	ldd	r25, Z+1	; 0x01
+ 23a:	8c 50       	subi	r24, 0x0C	; 12
+ 23c:	9e 4f       	sbci	r25, 0xFE	; 254
+ 23e:	90 93 0f 01 	sts	0x010F, r25	; 0x80010f <timer1+0x1>
+ 242:	80 93 0e 01 	sts	0x010E, r24	; 0x80010e <timer1>
+	timer2 = TCNT1 + WAIT_TIME;
+ 246:	80 81       	ld	r24, Z
+ 248:	91 81       	ldd	r25, Z+1	; 0x01
+ 24a:	8c 50       	subi	r24, 0x0C	; 12
+ 24c:	9e 4f       	sbci	r25, 0xFE	; 254
+ 24e:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <timer2+0x1>
+ 252:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <timer2>
+	timer3 = TCNT1 + WAIT_TIME;
+ 256:	80 81       	ld	r24, Z
+ 258:	91 81       	ldd	r25, Z+1	; 0x01
+ 25a:	8c 50       	subi	r24, 0x0C	; 12
+ 25c:	9e 4f       	sbci	r25, 0xFE	; 254
+ 25e:	90 93 11 01 	sts	0x0111, r25	; 0x800111 <timer3+0x1>
+ 262:	80 93 10 01 	sts	0x0110, r24	; 0x800110 <timer3>
+		}
+
+			/*Resolving outstanding conditions*/
+		if (mustRebootPin)			/*If we need to reboot a pin*/
+		{
+			pinReboot(pinToReboot);		/*Call the pinReboot Program and pass the number of the pin that is stalling*/
+ 266:	0c e0       	ldi	r16, 0x0C	; 12
+ 268:	11 e0       	ldi	r17, 0x01	; 1
+			mustRebootPin = false;		/*Reset the Flag used to tell if we need to reboot a pin*/
+		}
+
+		if (bootWaiting)			/*If we just rebooted a pin and are waiting for the pin to fully reboot*/
+		{
+			int waitTimer = TCNT1 + rebootTime;
+ 26a:	c4 e8       	ldi	r28, 0x84	; 132
+ 26c:	d0 e0       	ldi	r29, 0x00	; 0
+	timer3 = TCNT1 + WAIT_TIME;
+
+		/*Main Loop*/
+    while (1) 
+    {
+		if (!mustRebootPin && !bootWaiting)		/*As long as there are no outstanding conditions, run checkHanging*/
+ 26e:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <mustRebootPin>
+ 272:	81 11       	cpse	r24, r1
+ 274:	3c c0       	rjmp	.+120    	; 0x2ee <main+0x10a>
+ 276:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <bootWaiting>
+ 27a:	81 11       	cpse	r24, r1
+ 27c:	24 c0       	rjmp	.+72     	; 0x2c6 <main+0xe2>
+		{
+			oldValueSensor = checkHanging(sensor, sensorOut, oldValueSensor, timer1);	/*Check the Sensor Pin*/
+ 27e:	20 91 0e 01 	lds	r18, 0x010E	; 0x80010e <timer1>
+ 282:	30 91 0f 01 	lds	r19, 0x010F	; 0x80010f <timer1+0x1>
+ 286:	40 91 09 01 	lds	r20, 0x0109	; 0x800109 <oldValueSensor>
+ 28a:	60 e0       	ldi	r22, 0x00	; 0
+ 28c:	83 e0       	ldi	r24, 0x03	; 3
+ 28e:	0e 94 78 00 	call	0xf0	; 0xf0 <checkHanging>
+ 292:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <oldValueSensor>
+		}
+		if (!mustRebootPin && !bootWaiting)		
+ 296:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <mustRebootPin>
+ 29a:	81 11       	cpse	r24, r1
+ 29c:	28 c0       	rjmp	.+80     	; 0x2ee <main+0x10a>
+ 29e:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <bootWaiting>
+ 2a2:	81 11       	cpse	r24, r1
+ 2a4:	2a c0       	rjmp	.+84     	; 0x2fa <main+0x116>
+		{
+			oldValueRouter = checkHanging(router, routerOut, oldValueRouter, timer2);	/*Check the Router Pin*/
+ 2a6:	20 91 04 01 	lds	r18, 0x0104	; 0x800104 <timer2>
+ 2aa:	30 91 05 01 	lds	r19, 0x0105	; 0x800105 <timer2+0x1>
+ 2ae:	40 91 08 01 	lds	r20, 0x0108	; 0x800108 <oldValueRouter>
+ 2b2:	63 e0       	ldi	r22, 0x03	; 3
+ 2b4:	82 e0       	ldi	r24, 0x02	; 2
+ 2b6:	0e 94 78 00 	call	0xf0	; 0xf0 <checkHanging>
+ 2ba:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <oldValueRouter>
+		}
+		if (!mustRebootPin && !bootWaiting)		
+ 2be:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <mustRebootPin>
+ 2c2:	81 11       	cpse	r24, r1
+ 2c4:	14 c0       	rjmp	.+40     	; 0x2ee <main+0x10a>
+ 2c6:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <bootWaiting>
+ 2ca:	81 11       	cpse	r24, r1
+ 2cc:	1b c0       	rjmp	.+54     	; 0x304 <main+0x120>
+		{
+			oldValueLed = checkHanging(led, ledOut, oldValueLed, timer3);				/*Check the LED Pin*/
+ 2ce:	20 91 10 01 	lds	r18, 0x0110	; 0x800110 <timer3>
+ 2d2:	30 91 11 01 	lds	r19, 0x0111	; 0x800111 <timer3+0x1>
+ 2d6:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <oldValueLed>
+ 2da:	61 e0       	ldi	r22, 0x01	; 1
+ 2dc:	84 e0       	ldi	r24, 0x04	; 4
+ 2de:	0e 94 78 00 	call	0xf0	; 0xf0 <checkHanging>
+ 2e2:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <oldValueLed>
+		}
+
+			/*Resolving outstanding conditions*/
+		if (mustRebootPin)			/*If we need to reboot a pin*/
+ 2e6:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <mustRebootPin>
+ 2ea:	88 23       	and	r24, r24
+ 2ec:	31 f0       	breq	.+12     	; 0x2fa <main+0x116>
+		{
+			pinReboot(pinToReboot);		/*Call the pinReboot Program and pass the number of the pin that is stalling*/
+ 2ee:	f8 01       	movw	r30, r16
+ 2f0:	80 81       	ld	r24, Z
+ 2f2:	0e 94 c4 00 	call	0x188	; 0x188 <pinReboot>
+			mustRebootPin = false;		/*Reset the Flag used to tell if we need to reboot a pin*/
+ 2f6:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <mustRebootPin>
+		}
+
+		if (bootWaiting)			/*If we just rebooted a pin and are waiting for the pin to fully reboot*/
+ 2fa:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <bootWaiting>
+ 2fe:	88 23       	and	r24, r24
+ 300:	09 f4       	brne	.+2      	; 0x304 <main+0x120>
+ 302:	b5 cf       	rjmp	.-150    	; 0x26e <main+0x8a>
+		{
+			int waitTimer = TCNT1 + rebootTime;
+ 304:	28 81       	ld	r18, Y
+ 306:	39 81       	ldd	r19, Y+1	; 0x01
+ 308:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <rebootTime>
+ 30c:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <rebootTime+0x1>
+ 310:	28 0f       	add	r18, r24
+ 312:	39 1f       	adc	r19, r25
+				waitTimer = TCNT1 + rebootTime;
+				timer1 = TCNT1 + WAIT_TIME;
+				timer2 = TCNT1 + WAIT_TIME;
+				timer3 = TCNT1 + WAIT_TIME;
+			}
+			while(TCNT1 < waitTimer)	/*Wait enough time for pin to fully reboot*/
+ 314:	88 81       	ld	r24, Y
+ 316:	99 81       	ldd	r25, Y+1	; 0x01
+ 318:	82 17       	cp	r24, r18
+ 31a:	93 07       	cpc	r25, r19
+ 31c:	d8 f3       	brcs	.-10     	; 0x314 <main+0x130>
+			{}	
+			bootWaiting = false;		/*Set bootWaiting flag to false*/
+ 31e:	10 92 0b 01 	sts	0x010B, r1	; 0x80010b <bootWaiting>
+			
+			oldValueSensor = sensor;	/*Reset 'old' values used for logic and comparison*/
+ 322:	81 e0       	ldi	r24, 0x01	; 1
+ 324:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <oldValueSensor>
+			oldValueRouter = router;
+ 328:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <oldValueRouter>
+			oldValueLed = led;
+ 32c:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <oldValueLed>
+			
+			TCNT1 = 0;					/*Reset Timer*/
+ 330:	19 82       	std	Y+1, r1	; 0x01
+ 332:	18 82       	st	Y, r1
+			timer1 = TCNT1 + WAIT_TIME;
+ 334:	88 81       	ld	r24, Y
+ 336:	99 81       	ldd	r25, Y+1	; 0x01
+ 338:	8c 50       	subi	r24, 0x0C	; 12
+ 33a:	9e 4f       	sbci	r25, 0xFE	; 254
+ 33c:	90 93 0f 01 	sts	0x010F, r25	; 0x80010f <timer1+0x1>
+ 340:	80 93 0e 01 	sts	0x010E, r24	; 0x80010e <timer1>
+			timer2 = TCNT1 + WAIT_TIME;
+ 344:	88 81       	ld	r24, Y
+ 346:	99 81       	ldd	r25, Y+1	; 0x01
+ 348:	8c 50       	subi	r24, 0x0C	; 12
+ 34a:	9e 4f       	sbci	r25, 0xFE	; 254
+ 34c:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <timer2+0x1>
+ 350:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <timer2>
+			timer3 = TCNT1 + WAIT_TIME;
+ 354:	88 81       	ld	r24, Y
+ 356:	99 81       	ldd	r25, Y+1	; 0x01
+ 358:	8c 50       	subi	r24, 0x0C	; 12
+ 35a:	9e 4f       	sbci	r25, 0xFE	; 254
+ 35c:	90 93 11 01 	sts	0x0111, r25	; 0x800111 <timer3+0x1>
+ 360:	80 93 10 01 	sts	0x0110, r24	; 0x800110 <timer3>
+ 364:	84 cf       	rjmp	.-248    	; 0x26e <main+0x8a>
+
+00000366 <_exit>:
+ 366:	f8 94       	cli
+
+00000368 <__stop_program>:
+ 368:	ff cf       	rjmp	.-2      	; 0x368 <__stop_program>
